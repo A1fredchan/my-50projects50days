@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+}
+
+input {
+    height: 50px;
+    width: 0;
+    outline: none;
+    border: 0;
+    transition: 250ms;
+    font-size: 1.5em;
+}
+
+input::placeholder {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+input::after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color:red;
+    display: inline-block;
+}
+
+
+button {
+    height: 50px;
+    width: 50px;
+    border: 0;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#icon {
+    height: 40px;
+    width: 40px;
+    background-color: aqua;
+    margin: 0 auto;
+}
