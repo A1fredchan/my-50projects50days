@@ -99,11 +99,12 @@
         }
 
         #title {
+            font-size: 1.5em;
             color: rgb(156, 78, 233);
             margin-bottom: 22px;
         }
 
-        .presentation p{
+        .presentation p {
             margin-bottom: 50px;
         }
 
@@ -111,7 +112,7 @@
             color: orange;
         }
 
-        .presentation button {
+        .presentation a {
             background-color: #663399;
             color: white;
             height: 50px;
@@ -127,21 +128,25 @@
             transition: 0.5s;
         }
 
-        button:hover {
+        a:hover {
             transform: scale(0.95);
         }
 
-        button .icon {
+        a .icon {
             position: absolute;
             left: 0;
             height: 30px;
             width: 30px;
         }
 
-
+        a {
+            color: white;
+            text-decoration: none;
+        }
 
         .container {
             height: 2000px;
+            /* width: calc(100% - 17px); */
             display: flex;
             flex-flow: wrap;
         }
@@ -154,7 +159,7 @@
             position: relative;
         }
 
-        .container button {
+        .container a {
             background-color: #663399;
             color: white;
             height: 50px;
@@ -204,8 +209,10 @@
             font-size: 1.3em;
             color: white;
             position: absolute;
-            top: 25%;
-            left: 25%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
             opacity: 0;
             transition: all 0.5s;
         }
@@ -238,12 +245,12 @@
             <p id="title">50 Projects 50 Days</p>
             <h1>50 unique mini-projects to sharpen your HTML, CSS & JavaScript skills</h1>
             <p>Limited Promo Code: <span>5DAYPROMO</span></p>
-            <button>
+            <a href="https://github.com/A1fredchan/my-50projects50days/tree/main" class="button"
+                target="_blank">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-jinru"></use>
-                </svg>
-                Get It Now
-            </button>
+                </svg>Get It Now
+            </a>
         </div>
         <div class="container" id="container">
             <div class="panel">
@@ -253,7 +260,8 @@
                 </div>
                 <div class="hide">
                     <p>Expanding Cards</p>
-                    <button>Live Demo</button>
+                    <a href="https://github.com/A1fredchan/my-50projects50days/tree/main/1%20expending%20card"
+                        class="button" target="_blank">Live Demo</a>
                 </div>
             </div>
             <div class="panel">
@@ -263,7 +271,8 @@
                 </div>
                 <div class="hide">
                     <p>Progress Steps</p>
-                    <button>Live Demo</button>
+                    <a href="https://github.com/A1fredchan/my-50projects50days/tree/main/2%20Progress%20Steps"
+                        class="button" target="_blank">Live Demo</a>
                 </div>
             </div>
             <div class="panel">
@@ -274,7 +283,8 @@
                 </div>
                 <div class="hide">
                     <p>Rotating Navigation</p>
-                    <button>Live Demo</button>
+                    <a href="https://github.com/A1fredchan/my-50projects50days/tree/main/3%20Rotating%20Navigation%20Animation"
+                        class="button" target="_blank">Live Demo</a>
                 </div>
             </div>
             <div class="panel">
@@ -284,7 +294,8 @@
                 </div>
                 <div class="hide">
                     <p>Hidden Search</p>
-                    <button>Live Demo</button>
+                    <a href="https://github.com/A1fredchan/my-50projects50days/tree/main/4%20Hidden%20Search"
+                        class="button" target="_blank">Live Demo</a>
                 </div>
             </div>
             <div class="panel">
@@ -294,7 +305,8 @@
                 </div>
                 <div class="hide">
                     <p>Blurry Loading</p>
-                    <button>Live Demo</button>
+                    <a href="https://github.com/A1fredchan/my-50projects50days/tree/main/5%20Blurry%20Loading"
+                        class="button" target="_blank">Live Demo</a>
                 </div>
             </div>
             <div class="panel"></div>
