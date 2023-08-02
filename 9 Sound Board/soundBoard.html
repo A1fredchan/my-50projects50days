@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="soundBoard.css">
+    <title>Sound Board</title>
+</head>
+
+<body>
+    <div id="btns">
+
+        <!-- <button>applause<audio src="applause.mp3" id="applause"></audio></button>
+        <button>boo<audio src="boo.mp3" id="boo"></audio></button>
+        <button>gasp<audio src="gasp.mp3" id="gasp"></audio></button>
+        <button>tada<audio src="tada.mp3" id="tada"></audio></button>
+        <button>vitory<audio src="victory.mp3" id="victory"></audio></button>
+        <button>wrong<audio src="wrong.mp3" id="wrong"></audio></button> -->
+    </div>
+
+    <script>
+        const sounds = ['applause', 'boo', 'gasp', 'tada', 'victory', 'wrong']
+        const btns = document.querySelector('#btns')
+        sounds.forEach(sound => {
+            const btn = document.createElement('button')
+            btn.innerHTML = sound;
+            const audio = document.createElement('audio')
+            audio.src = sound + '.mp3';
+            btn.append(audio);
+            btns.append(btn);
+
+        })
+        const audios = document.querySelectorAll('audio')
+        btns.addEventListener('click', (e) => {
+            const btn = e.target
+            audios.forEach(audio => {
+                audio.pause()
+                audio.currentTime = 0;
+            })
+            btn.querySelector('audio').play()
+        })
+    </script>
+</body>
+
+</html>

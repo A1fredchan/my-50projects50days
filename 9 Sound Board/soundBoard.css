@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(161, 100, 223);
+    width: calc( 100vw - 17px);
+    height: calc( 100vh - 17px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button {
+    height: 80px;
+    width: 200px;
+    background-color: rgb(108, 56, 160);
+    border: 0;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1.5em;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover{
+    opacity: 0.8;
+}
