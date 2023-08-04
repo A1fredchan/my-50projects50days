@@ -150,7 +150,8 @@
             /* width: calc(100% - 17px); */
             display: flex;
             flex-flow: wrap;
-            align-content: flex-start; /* 换行后间距过大 */
+            align-content: flex-start;
+            /* 换行后间距过大 */
         }
 
         .panel {
@@ -218,6 +219,10 @@
             width: 100%;
             opacity: 0;
             transition: all 0.5s;
+        }
+
+        .hide a {
+            padding-right: 27px;
         }
 
         .panel:hover .vis {
