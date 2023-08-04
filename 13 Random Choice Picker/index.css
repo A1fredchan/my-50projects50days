@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(204, 227, 249);
+    height: calc(100vh - 17px);
+}
+
+h1{
+    color: #333;
+    font-size: 1.5em;
+}
+
+main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
