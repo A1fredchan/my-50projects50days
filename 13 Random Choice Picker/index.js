@@ -44,22 +44,41 @@ const times = 10
 function runHighlight() {
     const interval = setInterval(() => {
         const randomTag = pickRandomTag()
-
         highlightTag(randomTag)
 
         setTimeout(() => {
             unHighlightTag(randomTag)
         }, 100)
-    }, 100);
+    }, 100)
 
     setTimeout(() => {
         clearInterval(interval)
 
         setTimeout(() => {
             const randomTag = pickRandomTag()
-
             highlightTag(randomTag)
         }, 100)
-
     }, times * 100)
+
 }
+
+// optimize runHeighlight with requestAnimationFrame
+// function runHighlight() {
+//     let timesRun = 0
+//     const interval = setInterval(() => {
+//         const randomTag = pickRandomTag()
+//         highlightTag(randomTag)
+
+//         setTimeout(() => {
+//             unHighlightTag(randomTag)
+//         }, 100)
+//         timesRun += 1
+//         if (timesRun === times) {
+//             clearInterval(interval)
+//             setTimeout(() => {
+//                 const randomTag = pickRandomTag()
+//                 highlightTag(randomTag)
+//             }, 100)
+//         }
+//     }, 100)
+// }
