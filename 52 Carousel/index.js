@@ -1,7 +1,7 @@
 const items = document.querySelectorAll('.carousel-item')
 const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
-const indicators = document.querySelectorAll('.carousel-indicator')
+const indicators = document.querySelector('.carousel-indicators')
 const container = document.querySelector('.carousel-container')
 
 const firstItem = container.firstElementChild.cloneNode(true)
@@ -18,9 +18,22 @@ function moveTo(index) {
     container.style.transition = '0.5s'
     container.style.transform = `translateX(-${index * 100}%)`
     currentIndex = index
-    document.querySelector('.carousel-indicator.active').classList.remove('active')
-    indicators[currentIndex].classList.add('active')
+    indicators.querySelector('.active').classList.remove('active');
+    indicators.children[currentIndex].classList.add('active');
 }
+
+function addIndicators() {
+    for (let i = 0; i < itemLength; i++) {
+        const indicator = document.createElement('li');
+        indicator.classList.add('carousel-indicator');
+        if (i === currentIndex) {
+            indicator.classList.add('active');
+        }
+        indicators.appendChild(indicator);
+    }
+}
+
+addIndicators()
 
 function nextSlide() {
     if (currentIndex === itemLength - 1) {
