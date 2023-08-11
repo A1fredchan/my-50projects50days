@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: flex;
+            width: 500px;
+        }
+
+        .block {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+        }
+
+        #dragBlock {
+            background-color: #ff0000;
+            cursor: move;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div id="dragBlock" class="block"></div>
+    </div>
+    <script>
+        var dragBlock = document.getElementById("dragBlock");
+        var container = document.getElementById("container");
+        var blocks = document.getElementsByClassName("block");
+
+        dragBlock.addEventListener("mousedown", function (event) {
+            var offsetX = event.offsetX;
+            var offsetY = event.offsetY;
+
+            document.addEventListener("mousemove", onMouseMove);
+
+            function onMouseMove(event) {
+                var x = event.pageX - offsetX - container.getBoundingClientRect().left;
+                var y = event.pageY - offsetY - container.getBoundingClientRect().top;
+
+                dragBlock.style.left = x + "px";
+                dragBlock.style.top = y + "px";
+
+                // 检查拖动块与其他块的对齐情况
+                for (var i = 0; i < blocks.length; i++) {
+                    var rect = blocks[i].getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        dragBlock.style.left = rect.left - container.getBoundingClientRect().left + "px";
+                        dragBlock.style.top = rect.top - container.getBoundingClientRect().top + "px";
+                        break;
+                    }
+                }
+            }
+
+            document.addEventListener("mouseup", function () {
+                document.removeEventListener("mousemove", onMouseMove);
+            });
+        });
+    </script>
+</body>
+
+</html>

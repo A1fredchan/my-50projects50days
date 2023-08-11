@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(199, 186, 159);
+        }
+
+        .container {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #333;
+            background-color: rgb(225, 218, 211);
+        }
+
+        #fir {
+            position: absolute;
+            top: 300px;
+            left: 450px;
+        }
+
+        #sec {
+            position: absolute;
+            top: 300px;
+            left: 600px;
+        }
+
+        #thi {
+            position: absolute;
+            top: 300px;
+            left: 750px;
+        }
+
+        #for {
+            position: absolute;
+            top: 300px;
+            left: 900px;
+        }
+
+        #fif {
+            position: absolute;
+            top: 300px;
+            left: 1050px;
+        }
+
+        .box {
+            height: 100px;
+            width: 100px;
+            background-color: rgb(252, 156, 156);
+            border: 0;
+            position: absolute;
+            top: 301px;
+            left: 451px;
+        }
+
+        .box:hover {
+            cursor: grab;
+        }
+
+        .container.hover {
+            background-color: #333;
+            border: 1px dashed #fff;
+        }
+
+        .box:active {
+            cursor: move;
+            /* pointer-events: none; */
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="fir"></div>
+    <div class="container" id="sec"></div>
+    <div class="container" id="thi"></div>
+    <div class="container" id="for"></div>
+    <div class="container" id="fif"></div>
+    <div class="box" id="box"></div>
+    <script>
+        const box = document.getElementById('box');
+        const containers = document.querySelectorAll('.container');
+
+        box.addEventListener('mousedown', function (event) {
+
+            offsetx = event.clientX - box.offsetLeft;
+            offsety = event.clientY - box.offsetTop;
+
+            document.addEventListener('mousemove', mousemoveHandler);
+            document.addEventListener('mouseup', mouseupHandler);
+        });
+
+        function mousemoveHandler(event) {
+            box.style.left = event.clientX - offsetx + "px";
+            box.style.top = event.clientY - offsety + "px";
+            const index = select(event, true);
+            document.querySelector('.hover')?.classList.remove('hover');
+            containers[index]?.classList.add('hover');
+        }
+
+        function mouseupHandler(event) {
+            document.removeEventListener('mousemove', mousemoveHandler);
+            select(event, false);
+            document.removeEventListener('mouseup', mouseupHandler);
+        }
+
+        function select(event, isMoving) {
+            console.log(isMoving);
+
+            switch (true) {
+                case (event.clientX > 450 && event.clientX < 552) && (event.clientY > 300 && event.clientY < 400):
+                    if (!isMoving) {
+                        box.style.left = "451px";
+                        box.style.top = "301px";
+                    }
+                    return 0;
+                    break;
+                case (event.clientX > 600 && event.clientX < 702) && (event.clientY > 300 && event.clientY < 400):
+                    if (!isMoving) {
+                        box.style.left = "601px";
+                        box.style.top = "301px";
+                    }
+                    return 1;
+                    break;
+                case (event.clientX > 750 && event.clientX < 852) && (event.clientY > 300 && event.clientY < 400):
+                    if (!isMoving) {
+                        box.style.left = "751px";
+                        box.style.top = "301px";
+                    }
+                    return 2;
+                    break;
+                case (event.clientX > 900 && event.clientX < 1002) && (event.clientY > 300 && event.clientY < 400):
+                    if (!isMoving) {
+                        box.style.left = "901px";
+                        box.style.top = "301px";
+                    }
+                    return 3;
+                    break;
+                case (event.clientX > 1050 && event.clientX < 1152) && (event.clientY > 300 && event.clientY < 400):
+                    if (!isMoving) {
+                        box.style.left = "1051px";
+                        box.style.top = "301px";
+                    }
+                    return 4;
+                    break;
+                // default:
+                //     box.style.left = "451px";
+                //     box.style.top = "301px";
+            }
+        }
+
+        // containers.forEach(container => {
+        //     container.addEventListener('mouseover', () => {
+        //         container.classList.add('hover')
+        //         container.addEventListener('mouseout', () => {
+        //             container.classList.remove('hover')
+        //         })
+        //     })
+        // })
+
+    </script>
+</body>
+
+</html>
