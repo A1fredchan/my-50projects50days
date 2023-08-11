@@ -87,8 +87,37 @@
         const box = document.getElementById('box');
         const containers = document.querySelectorAll('.container');
 
-        box.addEventListener('mousedown', function (event) {
+        let currentIndex = 0;
 
+        // const containerRanges = [
+        //     { minX: 450, maxX: 552, minY: 300, maxY: 400 },
+        //     { minX: 600, maxX: 702, minY: 300, maxY: 400 },
+        //     { minX: 750, maxX: 852, minY: 300, maxY: 400 },
+        //     { minX: 900, maxX: 1002, minY: 300, maxY: 400 },
+        //     { minX: 1050, maxX: 1152, minY: 300, maxY: 400 },
+        // ];
+
+        const containerRanges = [...containers].map(c => {
+            const { left, top, width, height } = c.getBoundingClientRect();
+            // 获取元素的样式
+            var computedStyle = window.getComputedStyle(c);
+
+            // 获取边框宽度
+            var borderWidth = computedStyle.getPropertyValue('border-width');
+            console.log(c, borderWidth);
+            return {
+                minX: left,
+                maxX: left + width,
+                minY: top,
+                maxY: top + height,
+                borderWidth: parseFloat(borderWidth)
+            }
+        });
+
+        let offsetx = 0;
+        let offsety = 0;
+
+        box.addEventListener('mousedown', function (event) {
             offsetx = event.clientX - box.offsetLeft;
             offsety = event.clientY - box.offsetTop;
 
@@ -96,62 +125,56 @@
             document.addEventListener('mouseup', mouseupHandler);
         });
 
+        function setBoxPosition(left, top) {
+            box.style.left = left + "px";
+            box.style.top = top + "px";
+        }
+
         function mousemoveHandler(event) {
-            box.style.left = event.clientX - offsetx + "px";
-            box.style.top = event.clientY - offsety + "px";
+            const left = event.clientX - offsetx;
+            const top = event.clientY - offsety;
+            setBoxPosition(left, top);
+
+            const hoverContainer = document.querySelector('.hover');
+            hoverContainer?.classList.remove('hover');
+
             const index = select(event, true);
-            document.querySelector('.hover')?.classList.remove('hover');
             containers[index]?.classList.add('hover');
+
         }
 
         function mouseupHandler(event) {
             document.removeEventListener('mousemove', mousemoveHandler);
-            select(event, false);
+            currentIndex = select(event, false) || currentIndex;
+            containers[currentIndex].classList.remove('hover');
             document.removeEventListener('mouseup', mouseupHandler);
         }
 
         function select(event, isMoving) {
-            console.log(isMoving);
-
-            switch (true) {
-                case (event.clientX > 450 && event.clientX < 552) && (event.clientY > 300 && event.clientY < 400):
+            for (let i = 0; i < containerRanges.length; i++) {
+                const range = containerRanges[i];
+                const { minX, maxX, minY, maxY } = range;
+                if (
+                    event.clientX >= minX &&
+                    event.clientX <= maxX &&
+                    event.clientY >= minY &&
+                    event.clientY <= maxY
+                ) {
                     if (!isMoving) {
-                        box.style.left = "451px";
-                        box.style.top = "301px";
+                        const left = minX + 1;
+                        const top = minY + 1;
+                        setBoxPosition(left, top);
                     }
-                    return 0;
-                    break;
-                case (event.clientX > 600 && event.clientX < 702) && (event.clientY > 300 && event.clientY < 400):
+                    return i;
+                } else {
+                    console.log(11111);
                     if (!isMoving) {
-                        box.style.left = "601px";
-                        box.style.top = "301px";
+                     const { minX, minY, borderWidth } = containerRanges[currentIndex];
+                        const left = minX + borderWidth;
+                        const top = minY + borderWidth;
+                        setBoxPosition(left, top);
                     }
-                    return 1;
-                    break;
-                case (event.clientX > 750 && event.clientX < 852) && (event.clientY > 300 && event.clientY < 400):
-                    if (!isMoving) {
-                        box.style.left = "751px";
-                        box.style.top = "301px";
-                    }
-                    return 2;
-                    break;
-                case (event.clientX > 900 && event.clientX < 1002) && (event.clientY > 300 && event.clientY < 400):
-                    if (!isMoving) {
-                        box.style.left = "901px";
-                        box.style.top = "301px";
-                    }
-                    return 3;
-                    break;
-                case (event.clientX > 1050 && event.clientX < 1152) && (event.clientY > 300 && event.clientY < 400):
-                    if (!isMoving) {
-                        box.style.left = "1051px";
-                        box.style.top = "301px";
-                    }
-                    return 4;
-                    break;
-                // default:
-                //     box.style.left = "451px";
-                //     box.style.top = "301px";
+                }
             }
         }
 
